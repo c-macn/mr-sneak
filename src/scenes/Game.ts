@@ -1,6 +1,6 @@
 import * as easystarjs from 'easystarjs';
 
-import { Scene } from 'phaser';
+import { Scene, Geom } from 'phaser';
 import { CST } from '../constants';
 
 class GameScene extends Scene {
@@ -9,6 +9,7 @@ class GameScene extends Scene {
   private finder: easystarjs.js;
   private marker: Phaser.GameObjects.Graphics;
   private player: Phaser.GameObjects.Image;
+  private playerRect: Geom.Rectangle;
   private enemy: Phaser.GameObjects.Image;
 
   constructor() {
@@ -53,6 +54,19 @@ class GameScene extends Scene {
     this.marker.x = this.map.tileToWorldX(pointerTileX);
     this.marker.y = this.map.tileToWorldY(pointerTileY);
     this.marker.setVisible(!this.checkCollision(this.map, pointerTileX, pointerTileY));
+
+    // player colliderRectangle
+    const { x, y, width, height } = this.player;
+    this.playerRect = new Geom.Rectangle(x, y, width, height);
+
+    // raycasting
+    const visionEndY = this.enemy.y + (32 * 4);
+    const ray: Geom.Line = new Geom.Line(this.enemy.x, this.enemy.y, this.enemy.x, visionEndY);
+    
+    if (Geom.Intersects.LineToRectangle(ray, this.playerRect)) {
+      console.log(`You've been spooted`);
+    }
+
   }
 
   private getTileID(map: Phaser.Tilemaps.Tilemap, x: number, y: number): number {
