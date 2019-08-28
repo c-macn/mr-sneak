@@ -9,6 +9,7 @@ class GameScene extends Scene {
   private finder: easystarjs.js;
   private marker: Phaser.GameObjects.Graphics;
   private player: Phaser.GameObjects.Image;
+  private enemy: Phaser.GameObjects.Image;
 
   constructor() {
     super({key: CST.SCENES.GAME});
@@ -31,8 +32,11 @@ class GameScene extends Scene {
     this.player.setDepth(1);
     this.player.setOrigin(0, 0.5);
     this.camera.startFollow(this.player);
-
     
+    this.enemy = this.add.image(32 * 6, 32 * 8, 'player');
+    this.enemy.setDepth(1);
+    this.enemy.setOrigin(0, 0.5);
+
     const grid = this.populatePathfindingGrid(this.map);
     this.finder.setGrid(grid);
 
