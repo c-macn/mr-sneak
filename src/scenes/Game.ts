@@ -61,11 +61,20 @@ class GameScene extends Scene {
 
     // raycasting
     const visionEndY = this.enemy.y + (32 * 4);
-    const ray: Geom.Line = new Geom.Line(this.enemy.x, this.enemy.y, this.enemy.x, visionEndY);
     
-    if (Geom.Intersects.LineToRectangle(ray, this.playerRect)) {
+    const visionCone: Geom.Triangle = Geom.Triangle.BuildEquilateral(this.enemy.x + this.player.width / 2, this.enemy.y + 20, 100);
+    //const ray: Geom.Line = new Geom.Line(, this.enemy.y, this.enemy.x, visionEndY);
+
+    const graphics: Phaser.GameObjects.Graphics = this.add.graphics({ lineStyle: { width: 2, color: 0x00ff00 }, fillStyle: { color: 0x00ff00 } });
+    graphics.strokeTriangleShape(visionCone);
+    graphics.fillRectShape(this.playerRect);
+    graphics.fillTriangleShape(visionCone);
+
+    if (Geom.Intersects.RectangleToTriangle(this.playerRect, visionCone)) {
       console.log(`You've been spooted`);
     }
+
+    //graphics.clear();
 
   }
 
