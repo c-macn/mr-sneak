@@ -13,6 +13,20 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="417" name="kenny" tilewidth="32" tileheight="32" tilecount="416" columns="26">
+  <image source="../tile-sets/sokoban_tilesheet.png" trans="ff00ff" width="832" height="512"/>
+  <tile id="56">
+   <properties>
+    <property name="cost" type="int" value="2"/>
+    <property name="isAlarm" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="57">
+   <properties>
+    <property name="isAlarm" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="Tile Layer 1" width="10" height="20">
   <data>
    <tile gid="29"/>
@@ -97,8 +111,8 @@
    <tile gid="29"/>
    <tile gid="29"/>
    <tile gid="53"/>
-   <tile gid="53"/>
-   <tile gid="53"/>
+   <tile gid="473"/>
+   <tile gid="474"/>
    <tile gid="29"/>
    <tile gid="53"/>
    <tile gid="53"/>
@@ -107,8 +121,8 @@
    <tile gid="29"/>
    <tile gid="29"/>
    <tile gid="53"/>
-   <tile gid="53"/>
-   <tile gid="53"/>
+   <tile gid="499"/>
+   <tile gid="500"/>
    <tile gid="53"/>
    <tile gid="53"/>
    <tile gid="53"/>
